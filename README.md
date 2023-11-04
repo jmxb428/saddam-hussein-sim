@@ -1,2 +1,2 @@
-# saddam-hussein-sim
-saddam hussein simulator game
+# Requirements
+pygame, python 3
