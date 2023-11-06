@@ -1,10 +1,22 @@
 # rotation code is a modified version stack overflow answer 15098900
-import test as pg
+import pygame as pg
 from time import time
 start_time = time()
+import os
+import sys
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, "assets\\", relative_path)
 
 pg.init()
-pg.mixer.music.load("music.mp3")
+pg.mixer.music.load(resource_path("music.mp3"))
 pg.mixer.music.play()
 font = pg.font.SysFont(pg.font.get_default_font(),64)
 text1 = font.render("WASD to move",True,(0,0,0))
@@ -29,9 +41,9 @@ def rotate(surface, angle, pivot, offset):
 
 pg.init()
 screen = pg.display.set_mode()
-HIDEOUT = pg.image.load("back.jpg")
+HIDEOUT = pg.image.load(resource_path("back.jpg"))
 # The original image will never be modified.
-IMAGE = pg.image.load("saddamsp.png")
+IMAGE = pg.image.load(resource_path("saddamsp.png"))
 # Store the original center position of the surface.
 pivot = [200, 250]
 # This offset vector will be added to the pivot point, so the
@@ -71,8 +83,6 @@ while running:
     screen.blit(HIDEOUT,(0,0))
     screen.blit(rotated_image, rect)  # Blit the rotated image.
     pg.draw.circle(screen, (30, 250, 70), pivot, 3)  # Pivot point.
-    pg.draw.rect(screen, (30, 250, 70), rect, 1)  # The rect.
-    pg.draw.rect(screen, (0,255,0), pg.Rect(900,650,100,100),1)
     screen.blit(text1,(16,screen.get_height()-128))
     screen.blit(text2,(16,screen.get_height()-64))
     screen.blit(text3,(screen.get_width()-256,screen.get_height()-64))
@@ -82,7 +92,7 @@ while running:
     pg.display.flip()
 
 floopyDoop = font.render(actualTime,True,(0,0,0))
-gleepGlorp = pg.image.load("win.jpg")
+gleepGlorp = pg.image.load(resource_path("win.jpg"))
 screen.blit(gleepGlorp,(0,0))
 shloopFroop = pg.Rect(screen.get_width()/2 - floopyDoop.get_width()/2 -5, screen.get_height()/2-5,floopyDoop.get_width()+10,floopyDoop.get_height()+5)
 pg.draw.rect(screen, (255,255,255), shloopFroop, 0, 10)
