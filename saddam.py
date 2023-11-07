@@ -82,7 +82,6 @@ while running:
     # Drawing.
     screen.blit(HIDEOUT,(0,0))
     screen.blit(rotated_image, rect)  # Blit the rotated image.
-    pg.draw.circle(screen, (30, 250, 70), pivot, 3)  # Pivot point.
     screen.blit(text1,(16,screen.get_height()-128))
     screen.blit(text2,(16,screen.get_height()-64))
     screen.blit(text3,(screen.get_width()-256,screen.get_height()-64))
